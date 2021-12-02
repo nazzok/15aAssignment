@@ -17,45 +17,66 @@ class invalidRangeException
 	{};
 
 int main() {
+	try {
+		cout << "Test 1: A offset by 6\n";
+		cout << character('A', 6);
+	}
+	catch (invalidCharacterException) {
+		cout << "invalidCharacterException";
+	}
+	catch (invalidRangeException) {
+		cout << "invalidRangeException";
+	}
 
-	//valid
-	cout << "Test 1: A offset by 6\n";
-	cout << character('A', 6) << endl;
+	try {
+		cout << "\nTest 2: z offset by -1\n";
+		cout << character('z', -1) << endl;
+	}
+	catch (invalidCharacterException) {
+		cout << "invalidCharacterException";
+	}
+	catch (invalidRangeException) {
+		cout << "invalidRangeException";
+	}
 
-	cout << "Test 2: z offset by -1\n";
-	cout << character('z', -1) << endl;
+	try {
+		cout << "\nTest 3: a offset by -1\n";
+		cout << character('a', -1) << endl;
+	}
+	catch (invalidCharacterException) {
+		cout << "invalidCharacterException";
+	}
+	catch (invalidRangeException) {
+		cout << "invalidRangeException";
+	}
 
-	//invalid range
-	cout << "Test 3: a offset by -1\n";
-	cout << character('a', -1) << endl;
-
-	//invalid character
-	cout << "Test 4: ? offset by 2\n";
-	cout << character('?', 2) << endl;
+	try {
+		cout << "\nTest 4: ? offset by 2\n";
+		cout << character('?', 2) << endl;
+	}
+	catch (invalidCharacterException) {
+		cout << "invalidCharacterException";
+	}
+	catch (invalidRangeException) {
+		cout << "invalidRangeException";
+	}
 
 	return 0;
 }
 
 char character(char start, int offset) {
 	char end = '0';
-	try {
-		if (isalpha(start)) { //if the initial character is a letter
-			end = start + offset;
-			if (isalpha(end)) { //if final character is a letter
-			}
-			else { //if final character isn't a letter
-				throw false;
-			}
+	if (isalpha(start)) { //if the initial character is a letter
+		end = start + offset;
+		if (isalpha(end)) { //if final character is a letter
 		}
-		else { //if initial character isn't a letter
-			throw invalidCharacterException();
+		else { //if final character isn't a letter
+			throw invalidRangeException();
 		}
-		return end;
 	}
-	catch (invalidCharacterException) {
-		cout << "invalidCharacterException";
+	else { //if initial character isn't a letter
+		throw invalidCharacterException();
 	}
-	catch (bool invalidRangeException) {
-		cout << "invalidRangeException";
-	}
+	return end;
+
 }
